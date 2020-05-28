@@ -9,77 +9,6 @@
   background: #f2d184;
   width: 80%;
 }
-.auth-header {
-  display: none;
-}
-@media(max-width: 767px){
-  .auth-sidebar-container h1 {
-    font-size: 16px!important;
-    margin-bottom: 10px!important;
-    padding: 4px 6px 0px 10px !important;
-
-  }
-  .auth-sidebar-container p {
-    font-size: 13px!important;
-    padding: 4px 6px 0px 10px !important;
-    font-weight: bold;
-
-  }
-  .auth-sidebar header {
-    padding: 4px 6px 0px 10px !important;
-    max-width: 100%;
-  }
-  .main-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    max-width: 700px;
-  }
-
-  .auth-sidebar{
-    height:100px;
-    width: 100%;
-    margin: 0!important;
-    padding: 0!important;
-    font-size: 10px;
-  }
-  .auth-sidebar-container{
-    height: 200px;
-    margin: 0!important;
-    padding: 0!important;
-    font-size: 10px;
-  }
-  .container {
-    margin: 0!important;
-    padding: 0!important;
-    max-width: 500px!important;
-    height: 100%;
-    overflow: scroll;
-  }
-  .auth-container{
-    margin: 0px 30px 0 30px!important;
-    padding: 0;
-    max-width: 414px;
-  }
-
-  .auth-form {
-    max-width: 100%;
-  }
-
-  .auth-form input {
-    width: 100%!important;
-  }
-
-  .container nav {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 30px!important;
-    margin-right: 30px;
-  }
-
-}
 .auth-sidebar-container h1 {
   font-size: 20px;
   margin-bottom: 50px;
@@ -97,7 +26,7 @@
 /*container*/
 
 .container {
-  padding: 64px 10px 0px 0px;
+  padding: 64px 64px 30px;
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -108,7 +37,6 @@
   justify-content: flex-end;
   font-size: 15px;
   font-weight: bold;
-  max-width: 590px;
 }
 .container nav a, a:visited {
   font-size: 15px;
@@ -117,13 +45,12 @@
 }
 
 .auth-container{
-  margin: 0px 60px 80px 90px;
+  margin: 0 100px;
   max-height: 500px;
-  max-width: 500px;
 
 }
 .auth-form {
-  max-width: 500px;
+  width: 500px;
 }
 
 .auth-form label{
@@ -174,6 +101,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .auth-container h2 {
   margin-bottom: 30px;
   font-weight: bold;
