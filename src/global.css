@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+
+* {
+  margin:0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+html, body{
+  font: 400 14px Roboto, sans-serif;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  margin: 0;
+}
+input, button, textarea{
+  font: 400 18px Roboto, sans-serif;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  background: #f3f3f4;
+  border: 0;
+}
+
+input[type=email]:hover, input[type=password]:hover, input[type=text]:hover{
+  background: #fff;
+  box-shadow: 0 2px 15px rgb(237,169,52,.5);
+  transition: box-shadow 6s;
+  transition: background-color 2s;
+}
+
+
+
+
