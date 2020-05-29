@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Logon from './pages/Logon'
 import Signin from './pages/SignIn'
+import Dashboard from './pages/Dashboard'
 
 
 export default function Routes(){
@@ -10,6 +11,7 @@ export default function Routes(){
     <Switch>
       <Route path="/" exact component={Logon}></Route>
       <Route path="/signin" component={Signin}></Route>
+      <Route path="/dashboard" component={Dashboard}></Route>
     </Switch>
   </BrowserRouter>
   )

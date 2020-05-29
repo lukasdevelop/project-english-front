@@ -1,7 +1,33 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link, useHistory} from 'react-router-dom'
+import api from '../../services/api'
 
 export default function Signin() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const history = useHistory()
+  const data = {
+    email,
+    password
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    try {
+      const result = await api.post('auth/sign', data)
+
+      const token = `Baerer ${result.data.token}`
+      localStorage.setItem('id', result.data.user.id)
+      localStorage.setItem('name', result.data.user.name)
+      localStorage.setItem('token', token)
+
+      history.push('/dashboard')
+
+    } catch (error) {
+      alert(error)
+    }
+
+  }
 
   return (
     <div className="signin-container">
@@ -23,14 +49,20 @@ export default function Signin() {
               <h2>Sign In</h2>
             </header>
             <div className="auth-form">
-              <form>
+              <form onSubmit={handleLogin}>
                 <label htmlFor="email">Email</label>
-                <input type="email"></input>
-                <div class="input-group">
+                <input type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <div className="input-group">
                   <label htmlFor="password">Password</label>
                   <nav><Link to="/">Forgot password?</Link></nav>
                 </div>
-                <input type="password"></input>
+                <input type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <button><span>Sign In</span></button>
               </form>
             </div>
