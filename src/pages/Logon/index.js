@@ -31,8 +31,8 @@ export default function Logon() {
     console.log(data)
 
     try {
-      await api.post('/auth/register', data)
-
+      const result = await api.post('/auth/register', data)
+      console.log(result)
       history.push('/signin')
 
     } catch (error) {
