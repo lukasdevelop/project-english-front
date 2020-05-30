@@ -16,7 +16,7 @@ export default function Signin() {
     try {
       const result = await api.post('auth/sign', data)
 
-      const token = `Baerer ${result.data.token}`
+      const token = `${result.data.token}`
       localStorage.setItem('id', result.data.user.id)
       localStorage.setItem('name', result.data.user.name)
       localStorage.setItem('token', token)
@@ -24,7 +24,9 @@ export default function Signin() {
       history.push('/dashboard')
 
     } catch (error) {
-      alert(error)
+
+      alert(error.msg)
+
     }
 
   }
