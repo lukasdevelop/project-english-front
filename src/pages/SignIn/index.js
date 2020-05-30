@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import api from '../../services/api'
 
 export default function Signin() {
+  const { register, handleSubmit, errors } = useForm()
+  const [validation, setValidation] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
@@ -11,8 +14,8 @@ export default function Signin() {
     password
   }
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
+  const handleLogin = async () => {
+    //e.preventDefault()
     try {
       const result = await api.post('auth/sign', data)
 
@@ -24,9 +27,7 @@ export default function Signin() {
       history.push('/dashboard')
 
     } catch (error) {
-
-      alert(error.msg)
-
+      setValidation(error.response.data.message)
     }
 
   }
@@ -51,21 +52,29 @@ export default function Signin() {
               <h2>Sign In</h2>
             </header>
             <div className="auth-form">
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleSubmit( handleLogin )}>
                 <label htmlFor="email">Email</label>
                 <input type="text"
+                  name="email"
+                  ref={register({ required: true })}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                <p>{errors.email && 'Please email is required'}</p>
                 <div className="input-group">
                   <label htmlFor="password">Password</label>
                   <nav><Link to="/">Forgot password?</Link></nav>
                 </div>
                 <input type="password"
                   value={password}
+                  name="password"
+                  ref={register({ required: true})}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <p>{errors.password && 'Please password is required'}</p>
                 <button><span>Sign In</span></button>
+                <p className="errors">{validation}</p>
               </form>
             </div>
           </div>
