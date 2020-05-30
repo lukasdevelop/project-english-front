@@ -34,6 +34,10 @@ input[type=email]:hover, input[type=password]:hover, input[type=text]:hover{
   transition: background-color 2s;
 }
 
+.errors{
+  color: red;
+}
+
 
 
 
