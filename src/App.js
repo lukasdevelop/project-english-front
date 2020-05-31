@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import Logon from './pages/Logon'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './global.css';
 import Router from './routes'
 
