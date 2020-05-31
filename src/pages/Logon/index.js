@@ -113,8 +113,9 @@ export default function Logon() {
                 <label>No </label>
                 <input type="radio" defaultChecked={toogle} name="invited" onBlur={(e) => setCode('')} onClick={() => toogleState(false)}></input>
                 <Code />
-                <p className="errors">{errors.code && 'Code dont be nothing'}</p>
               </div>
+              <p className="errors">{errors.code && 'Code dont be nothing'}</p>
+
               <button><span>Create Account</span></button>
             </form>
           </div>
