@@ -71,7 +71,7 @@ return (
           </nav>
           <div className="auth-container">
             <header>
-              <h2>Reset Password</h2>
+              <h2><strong>Reset Password</strong></h2>
             </header>
             <div className="auth-form">
               <form onSubmit={handleSubmit(handleSubmitChange)}>
