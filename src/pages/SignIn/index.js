@@ -11,6 +11,7 @@ export default function Signin() {
   const [validation, setValidation] = useState([])
   const [validationToModel, SetValidationToModel] = useState([])
   const [controlMsg, setControlMsg] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,7 +28,7 @@ export default function Signin() {
     password
   }
 
-  const handleLogin = async () => {
+const handleLogin = async () => {
 
     try {
       const result = await api.post('auth/sign', data)
@@ -42,11 +43,11 @@ export default function Signin() {
     } catch (error) {
       setValidation(error.response.data.message)
     }
-  }
+}
 
-  const verifyStyleForMsgModel = code => (code === 0) ? setControlMsg(true) : setControlMsg(false);
+const verifyStyleForMsgModel = code => (code === 0) ? setControlMsg(true) : setControlMsg(false);
 
-
+const loadingPages = status => (status === 0) ? setLoading(false) : setLoading(true)
 
 const handleForgot = async (e) => {
   e.preventDefault()
@@ -54,14 +55,18 @@ const handleForgot = async (e) => {
   const email = e.target.emailrecoverId.value
 
   if (email === "") {
+    loadingPages(1)
 
     verifyStyleForMsgModel(0)
     SetValidationToModel('Email is required')
+
+    loadingPages(0)
     return
   }
   const data = {
     email
   }
+  loadingPages(1)
   try {
     const response = await api.post('auth/forgot-password', data)
 
@@ -71,6 +76,7 @@ const handleForgot = async (e) => {
   } catch (error) {
     SetValidationToModel(error.response.data.message)
   }
+  loadingPages(0)
 }
 
 function RecoverModal() {
@@ -89,6 +95,7 @@ function RecoverModal() {
                 ref={register({ required: true })}
                 name="emailrecover"
               />
+              {(loading) ? <span className="loading">Loading...</span> : ''}
               <span className={controlMsg ? 'errors' : 'success'}>{validationToModel}</span>
               <br />
             </Form.Group>
