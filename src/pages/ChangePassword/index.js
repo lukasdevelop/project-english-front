@@ -2,50 +2,56 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
-
 import api from '../../services/api'
 
 export default function ChangePassword() {
-  const { register, errors, handleSubmit } = useForm()
-  const [validation, setValidation] = useState([])
-
-
-  const [loading, setLoading] = useState(false)
-
+  const { register, errors, handleSubmit, formState } = useForm({
+    mode: "onChange"
+  })
   const [password, setPassword] = useState('')
-
+  const [confirmpassword, setConfirmPassword] = useState('')
+  const [validation, setValidation] = useState([])
+  const { touched  } = formState;
+  const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
   const history = useHistory()
-  const data = {
-    password
+
+  const loadingPages = status => (status === 0) ? setLoading(false) : setLoading(true)
+
+  const handleSubmitChange = async ({password}) => {
+
+    let token = (new URLSearchParams(window.location.search)).get("token")
+
+    const data = {
+      password,
+      token
+    }
+
+    try {
+      const response = await api.put('auth/reset-password', data)
+
+      alert(response.data.message)
+
+      history.push('/signin')
+
+    } catch (error) {
+      setValidation(error.response.data.message)
+    }
   }
 
-const loadingPages = status => (status === 0) ? setLoading(false) : setLoading(true)
+  const onVerifyNewPassword = () => {
 
-const handleForgot = async (e) => {
-  e.preventDefault()
+    if(touched.password === true && touched.confirmpassword === true){
+      if(password !== confirmpassword){
+        setValidation('The passwords dont match')
+        setShow(true)
 
-  const email = e.target.emailrecoverId.value
-
-  if (email === "") {
-    loadingPages(1)
-
-    loadingPages(0)
-    return
+      }else{
+        setShow(false)
+        setValidation("")
+      }
+   }
   }
-  const data = {
-    email
-  }
-  loadingPages(1)
-  try {
-    const response = await api.post('auth/forgot-password', data)
-
-    console.log(response.data.message)
-
-  } catch (error) {
-    console.log(error.response.data.message)
-  }
-  loadingPages(0)
-}
 
 return (
   <>
@@ -65,21 +71,33 @@ return (
           </nav>
           <div className="auth-container">
             <header>
-              <h2>Sign In</h2>
+              <h2>Reset Password</h2>
             </header>
             <div className="auth-form">
-              <form onSubmit={handleSubmit()}>
+              <form onSubmit={handleSubmit(handleSubmitChange)}>
                 <div className="input-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="new">New Password</label>
                 </div>
                 <input type="password"
                   ref={register({ required: true })}
-                  value={password}
+
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
+                  onBlur={onVerifyNewPassword}
                 />
-                <p className="errors">{errors.password && 'Please password is required'}</p>
-                <button><span>Change</span></button>
+                <p className="errors">{errors.password && 'Please new password is required'}</p>
+
+                <label htmlFor="new">Confirm Password</label>
+                <input type="password"
+                  ref={register({ required: true })}
+                  name="confirmpassword"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onBlur={onVerifyNewPassword}
+                />
+                {/* <pre>{JSON.stringify(formState, null, 2)}</pre> */}
+
+                <p className="errors">{errors.confirmpassword && 'Please confirm a new password'}</p>
+                <button disabled={show}><span>Change</span></button>
                 <p className="errors">{validation}</p>
               </form>
             </div>
