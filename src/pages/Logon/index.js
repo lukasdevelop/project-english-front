@@ -9,6 +9,8 @@ export default function Logon() {
   const { register, handleSubmit, errors } = useForm()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [validation, setValidation] = useState([])
+
   const [password, setPassword] = useState('')
   const [facebook, setFacebook] = useState('')
   const [github, setGithub] = useState('')
@@ -35,7 +37,7 @@ export default function Logon() {
       history.push('/signin')
 
     } catch (error) {
-      alert(error)
+      setValidation(error.response.data.message)
     }
   }
 
@@ -115,6 +117,7 @@ export default function Logon() {
                 <Code />
               </div>
               <p className="errors">{errors.code && 'Code dont be nothing'}</p>
+              <p className="errors">{validation}</p>
 
               <button><span>Create Account</span></button>
             </form>

@@ -84,7 +84,7 @@ function RecoverModal() {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Forgot Password</Modal.Title>
+          <Modal.Title><strong>Forgot Password</strong></Modal.Title>
         </Modal.Header>
         <form onSubmit={(e) => handleSubmit(handleForgot(e))}>
           <Modal.Body>
