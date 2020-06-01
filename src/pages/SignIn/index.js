@@ -44,10 +44,8 @@ export default function Signin() {
     }
   }
 
-  const mensagens = (code) => {
+  const verifyStyleForMsgModel = code => (code === 0) ? setControlMsg(true) : setControlMsg(false);
 
-    (code === 0) ? setControlMsg(true) : setControlMsg(false);
-  }
 
 
 const handleForgot = async (e) => {
@@ -57,7 +55,7 @@ const handleForgot = async (e) => {
 
   if (email === "") {
 
-    mensagens(0)
+    verifyStyleForMsgModel(0)
     SetValidationToModel('Email is required')
     return
   }
@@ -67,7 +65,7 @@ const handleForgot = async (e) => {
   try {
     const response = await api.post('auth/forgot-password', data)
 
-    mensagens(1)
+    verifyStyleForMsgModel(1)
     SetValidationToModel(`${response.data.message} Verify your E-mail.`)
 
   } catch (error) {
