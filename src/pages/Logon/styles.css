@@ -150,6 +150,18 @@
   border: 0;
 }
 
+.success {
+  color: green;
+  display: flex;
+  justify-content: center;
+  border: 1px solid green;
+  margin: 30px;
+  padding: 50px;
+  max-width: 400px;
+
+}
+
+
 .button{
   cursor: pointer;
   background: #866118;
