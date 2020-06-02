@@ -21,8 +21,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -250,9 +248,6 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <Toolbar>
-
-
-
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -263,9 +258,9 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Project XP
           </Typography>
-          <div className={classes.grow} />
+          <div className="icons-right">
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -287,9 +282,22 @@ export default function PersistentDrawerLeft() {
             >
               <AccountCircle />
             </IconButton>
+
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+            </div>
           </div>
           {renderMobileMenu}
-    {renderMenu}
+          {renderMenu}
         </Toolbar>
       </AppBar>
       <Drawer
