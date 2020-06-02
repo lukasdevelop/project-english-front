@@ -1,0 +1,20 @@
+.navbar {
+  background:  #f2d184;
+  padding: 10px 70px 10px 70px;
+}
+.box-navbar-right{
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+}
+button {
+  color: #f2d184!important;
+  background: #866118!important;
+  border: 0!important;
+}
+.btn-request{
+  background: saddlebrown!important;
+}
+
+
+

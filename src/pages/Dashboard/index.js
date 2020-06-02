@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
-import api from '../../services/api'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
+import Router from './routes'
+import './styles.css'
+import { Col, Row, Container } from 'react-bootstrap'
+import Header from '../../components/Header'
 
 export default function Dashboard() {
-  const token = localStorage.getItem('token')
+
   return (
-    <div className="dashboard-container">
-      <h1>Dashboard</h1>
-    </div>
+    <>
+      <Header />
+      <Router />
+    </>
   )
 }

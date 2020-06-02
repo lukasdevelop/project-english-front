@@ -55,7 +55,7 @@ export default function Logon() {
       <section className="auth-sidebar">
         <div className="auth-sidebar-container">
           <header>
-            <h1>Project English</h1>
+            <h1>Project XP</h1>
             <p>Integration between <br />developments to exchange XP</p>
           </header>
         </div>
