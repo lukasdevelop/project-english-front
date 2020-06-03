@@ -1,17 +1,11 @@
 import React from 'react'
 
-import PersistentDrawerLeft from '../../../components/Sidem'
+import PersistentDrawerLeft from '../../../components/PersistentDrawerLeft'
 
 export default function Home(){
   return (
     <>
-
-    <div className="main-container">
-    <section className="sidebar-chat">
-    <PersistentDrawerLeft />
-    </section>
-    </div>
-
+        <PersistentDrawerLeft />
     </>
   )
 }

@@ -1,7 +1,26 @@
 .icons-right{
   margin-left: auto;
-
+  display: flex;
+  justify-content: space-between;
+}
+@media(max-width: 960px){
+  #btn-forum, #btn-developments{
+    display: none;
+  }
+}
+.icons-left{
+  margin-right: 20px;
+  margin-left: 40px;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
 }
 .MuiAppBar-colorPrimary {
   background: #866118!important;
 }
+
+.btn-products {
+  background: #ecaa38!important;
+  border: 0!important;
+}
+
