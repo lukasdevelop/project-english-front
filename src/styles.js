@@ -47,6 +47,8 @@ export const Suggestions = styled.div`
   background: #e0e0e0;
   border: 1px solid #cfcfcf;
   overflow: scroll;
+  list-style:none;
+
 `;
 
 export const TitleSuggestion = styled.h6`
@@ -54,8 +56,9 @@ export const TitleSuggestion = styled.h6`
   font-weight: bold;
 `;
 
-export const ContentSuggestion = styled.p`
+export const ContentSuggestion = styled.li`
   font-size: 14px;
+  list-style:none;
 `;
 
 export const Author = styled.span`
