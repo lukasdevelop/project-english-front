@@ -75,7 +75,20 @@ export const Liked = styled.p`
   margin-top: 13px;
   color: green;
   display:flex;
-
+`;
+export const Chat = styled.div`
+  max-width: 300px;
+  height: 500px;
+  background: #000;
+  color: #fff;
+  padding:5px;
+  overflow-y: auto;
+  font-size:15px;
+`;
+export const Button = styled.button`
+  width: 100%;
+  padding: 5px;
+  
 `;
 
 
