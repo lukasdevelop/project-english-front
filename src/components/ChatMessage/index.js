@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import { Chat, Button } from '../../styles'
 import io from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
+import './styles.css'
 const myId = uuidv4()
 const socket = io(process.env.REACT_APP_API_URL);
 
 const ChatMessage = () => {
   const [message, setMessage] = useState('')
+  const [name, setName] = useState('')
   const [messages, setMessages] = useState([])
 
+
+
   useEffect(() => {
-    console.log(messages)
-    const handleNewMessage = newMessage =>
-      setMessages([...messages, newMessage])
+    setName(localStorage.getItem('name'))
+
+    const handleNewMessage = newMessage => setMessages([...messages, newMessage])
     socket.on('sendMessage', handleNewMessage)
     return () => socket.off('sendMessage', handleNewMessage)
 
@@ -26,28 +31,29 @@ const ChatMessage = () => {
     if (message.trim('')) {
       socket.emit('sendMessage', {
         id: myId,
-        message
+        message,
+        name
       })
       setMessage('')
     }
   }
   return (
     <>
-      <main className="container">
+      <Chat>
         <ul className="list">
-          {messages.map(m => (
-            <li key={m.id} className="list__item list__item--mine">
+          {messages.map((m, index) => (
+            <li key={index} className={m.id === myId ? 'mine' : 'other'}>
               <span className="message message-mine">
-                {m.message}
+              {m.name}: {m.message}
               </span>
             </li>
           ))}
         </ul>
-        <form className="form" onSubmit={handleFormSubmit}>
+      </Chat>
+      <form className="form" onSubmit={handleFormSubmit}>
           <input value={message} onChange={handleInputChange} className="form__field" type="text" name="message" placeholder="your message"></input>
-          <button>Send</button>
+          <Button>Send</Button>
         </form>
-      </main>
     </>
   )
 }
