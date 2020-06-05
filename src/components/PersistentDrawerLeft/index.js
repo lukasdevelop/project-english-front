@@ -202,7 +202,7 @@ export default function PersistentDrawerLeft() {
       onClose={handleMobileMenuClose}
     >
         <MenuItem>
-          <p>Developments</p>
+          <p>Developers</p>
         </MenuItem>
         <MenuItem>
           <p>Forum</p>

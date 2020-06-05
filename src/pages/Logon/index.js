@@ -56,7 +56,7 @@ export default function Logon() {
         <div className="auth-sidebar-container">
           <header>
             <h1>Project XP</h1>
-            <p>Integration between <br />developments to exchange XP</p>
+            <p>Integration between <br />developer to exchange XP</p>
           </header>
         </div>
       </section>
@@ -87,13 +87,13 @@ export default function Logon() {
               />
               <p className="errors">{errors.email && 'Please email is required'}</p>
               <label htmlFor="facebook">Facebook</label>
-              <input type="text" placeholder="https://www.facebook.com/"
+              <input type="text"
                 name="facebook"
                 value={facebook}
                 onChange={(e) => setFacebook(e.target.value)}
               />
               <label htmlFor="github">Github</label>
-              <input type="text" placeholder="https://github.com/"
+              <input type="text"
                 value={github}
                 name="github"
                 ref={register({required: true})}

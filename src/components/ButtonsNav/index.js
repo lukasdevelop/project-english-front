@@ -25,7 +25,7 @@ export default function ButtonsNav() {
         <Button id="btn-forum" variant="contained">Forum</Button>
       </div>
       <div>
-        <Button id="btn-developments" variant="contained">Developments</Button>
+        <Button id="btn-developments" variant="contained">Developers</Button>
       </div>
 
     </>
