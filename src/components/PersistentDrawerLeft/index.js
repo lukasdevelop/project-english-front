@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,17 +23,10 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 //componentes
-import {Chat} from '../../styles'
+import ChatMessage from '../ChatMessage'
 import Popover from '../Popover'
 import ButtonsNav from '../ButtonsNav'
 import Principal from '../Principal'
-import io from 'socket.io-client';
-
-import ChatMessage from '../ChatMessage'
-
-const socket = io(process.env.REACT_APP_API_URL);
-
-
 
 const drawerWidth = 240;
 
@@ -153,12 +146,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
-  const [message, setMessage] = useState('')
-  const [name, setName] = useState('')
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const [mgs, setMgs] = useState([])
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -167,24 +156,6 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(event.currentTarget);
   };
 
-
-
-  const handleChat = (e) => {
-    e.preventDefault()
-    const text = e.target.message.value
-
-    const messageObject = {
-      name: localStorage.getItem('name'),
-      message: text
-    }
-
-    mgs.push(messageObject)
-
-    setName(messageObject.name)
-
-    socket.emit('sendMessage', messageObject)
-
-  }
 
 
   const handleMobileMenuClose = () => {
@@ -330,27 +301,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-          <Chat>
-            {
-              mgs.map((item) => (
-                <ChatMessage name={item.name} message={item.message} />
-              ))
-            }
-
-          </Chat>
-        <Divider />
-        <List>
-          {['Send'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <form onSubmit={(e) => handleChat(e)}>
-          <input type="text" name="message"  placeholder="your message"></input>
-          <button>Send</button>
-        </form>
+        <ChatMessage></ChatMessage>
       </Drawer>
       <main
         className={clsx(classes.content, {
