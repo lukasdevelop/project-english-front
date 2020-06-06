@@ -84,11 +84,12 @@ export const Chat = styled.div`
   padding:5px;
   overflow-y: auto;
   font-size:15px;
+ 
 `;
 export const Button = styled.button`
   width: 100%;
   padding: 5px;
-  
+
 `;
 
 
