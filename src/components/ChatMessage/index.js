@@ -44,7 +44,7 @@ const ChatMessage = () => {
           {messages.map((m, index) => (
             <li key={index} className={m.id === myId ? 'mine' : 'other'}>
               <span className="message message-mine">
-              {m.name}: {m.message}
+                {m.name}: {m.message}
               </span>
             </li>
           ))}

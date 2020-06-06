@@ -3,12 +3,14 @@ import { Projects, TitlePage, Title, Container, Content, Suggestions, TitleSugge
 import { Link } from 'react-router-dom'
 import { FiThumbsUp } from 'react-icons/fi'
 import io from 'socket.io-client';
+import api from '../../services/api'
 
 const socket = io(process.env.REACT_APP_API_URL);
 
 
 export default function Principal() {
-  let [suggestion, setSuggestions] = useState([])
+  const [suggestion, setSuggestions] = useState([])
+  const [projects, setProjects] = useState([])
 
   const banco = [{
     title: 'Project for Community',
@@ -17,9 +19,20 @@ export default function Principal() {
     votes: "1"
   }]
 
+  const projectsHighlights = async () => {
+    try {
+      const projects = await api.get('projects')
+      setProjects(projects.data)
+    } catch (error) {
+      alert('Error unexpected try again.' + error)
+    }
+
+  }
+
   useEffect(() => {
 
     setSuggestions(banco)
+    projectsHighlights()
 
     socket.on("FromApi", data => {
       const n = banco.concat(data).reverse()
@@ -32,18 +45,12 @@ export default function Principal() {
 
       <TitlePage>Latest Projects</TitlePage>
       <Container>
+      {projects.map(project => (
         <Projects>
-          <Title>Project For Kids</Title>
-          <Content>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley...<Link to="/"> More</Link></Content>
+            <Title>{project.title}</Title>
+            <Content>{project.description}<Link to="/"> More</Link></Content>
         </Projects>
-        <Projects>
-          <Title>Project for Pets</Title>
-          <Content>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley...<Link to="/"> More</Link></Content>
-        </Projects>
-        <Projects>
-          <Title>Project for community</Title>
-          <Content>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley...<Link to="/"> More</Link></Content>
-        </Projects>
+        ))}
       </Container>
       <TitlePage>Suggestion Projects</TitlePage>
       <Suggestions>
